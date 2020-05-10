@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutterwidgets/src/pages/alert_page.dart';
 import 'package:flutterwidgets/src/pages/providers/menu_providers.dart';
 import 'package:flutterwidgets/src/pages/utils/icon_string_utils.dart';
 
@@ -7,21 +6,18 @@ import 'package:flutterwidgets/src/pages/utils/icon_string_utils.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Material App',
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text('Home'), centerTitle: true,
         ),
         body: _lista(),
-      ),
     );
   }
 
   Widget _lista() {
 
     return FutureBuilder(
+    initialData: [],
     future: menuProvider.cargarData(),
     builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot){
 
@@ -30,8 +26,6 @@ class HomePage extends StatelessWidget {
           children: _listItems(snapshot.data, context),
 
         );
-
-
       }, 
     );
   }
@@ -48,14 +42,13 @@ class HomePage extends StatelessWidget {
           trailing: Icon(Icons.keyboard_arrow_right, color: Colors.blue,),
           onTap: () {
               
+            Navigator.pushNamed(context, '/'+opt['ruta']);
 
-              final route = MaterialPageRoute(builder: (context){
+             /*final route = MaterialPageRoute(
+               builder: (context){
                 return AlertPage();
               });
-
-              Navigator.push(context, route);
-
-
+             Navigator.push(context, route);*/
 
           },
         );
